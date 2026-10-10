@@ -1,5 +1,3 @@
-
-
 # Pneumonia Classification with PyTorch and Grad-CAM
 
 ## Overview
@@ -20,7 +18,6 @@ The main objectives of the project are to:
 - Introduce model interpretability through Grad-CAM visualizations.
 
 > **Note:** This project is intended for educational purposes only and is not designed for clinical use.
-
 
 ## Creating a Virtual Environment and Installing Dependencies
 
@@ -76,7 +73,6 @@ The following package is used to generate Grad-CAM visualizations:
 pip install grad-cam
 ```
 
-
 ## Project Structure
 
 ```text
@@ -108,7 +104,6 @@ PneumoniaCNN/
 - `Notebooks/PneumoniaCNN_Experiments.ipynb` contains the exploratory experiments used during model development.
 - `Plots/` contains selected training/validation curves and Grad-CAM visualizations.
 
-
 ## Dataset
 
 The project uses the **PneumoniaMNIST** dataset from the MedMNIST collection.
@@ -119,7 +114,6 @@ The dataset contains grayscale chest X-ray images with two classes:
 - `1` — Pneumonia
 
 The images are resized to `128 × 128` pixels before being passed to the CNN.
-
 
 ## Model
 
@@ -135,7 +129,6 @@ The architecture includes:
 - Fully connected layers
 
 The final layer produces a single logit, which is converted into a probability using the sigmoid function.
-
 
 ## Training and Evaluation
 
@@ -155,6 +148,42 @@ The final model is evaluated on the test dataset using metrics such as:
 - F1-score
 - Confusion matrix
 
+## Example Test Results (Single Run)
+
+The following results were obtained from **one example training run** evaluated on the PneumoniaMNIST test set (624 images). **These are not averages across multiple runs**, and results may vary between runs.
+
+### Overall Test Metrics
+
+| Metric | Value |
+|---|---:|
+| Test loss | 0.2531 |
+| Accuracy | 0.8478 |
+| Precision (Pneumonia) | 0.8753 |
+| Recall (Pneumonia) | 0.8821 |
+| F1-score (Pneumonia) | 0.8787 |
+
+Precision, recall, and F1-score above use **Pneumonia** as the positive class.
+
+### Classification Report
+
+| Class | Precision | Recall | F1-score | Support |
+|---|---:|---:|---:|---:|
+| Normal | 0.80 | 0.79 | 0.80 | 234 |
+| Pneumonia | 0.88 | 0.88 | 0.88 | 390 |
+| **Accuracy** | — | — | **0.85** | **624** |
+| Macro avg | 0.84 | 0.84 | 0.84 | 624 |
+| Weighted avg | 0.85 | 0.85 | 0.85 | 624 |
+
+### Confusion Matrix
+
+Rows represent **actual labels** and columns represent **predicted labels**.
+
+| Actual \ Predicted | Normal | Pneumonia |
+|---|---:|---:|
+| **Normal** | 185 | 49 |
+| **Pneumonia** | 46 | 344 |
+
+In this example, the model correctly classified **185 Normal** images and **344 Pneumonia** images. It misclassified **49 Normal** images as Pneumonia and **46 Pneumonia** images as Normal.
 
 ## Model Experiments
 
@@ -168,11 +197,10 @@ Several small experiments were performed during development, including:
 These experiments are available in:
 
 ```text
-Notebooks/PneumoniaCNN_experiments.ipynb
+Notebooks/PneumoniaCNN_Experiments.ipynb
 ```
 
 The selected final model uses an adaptive pooling size of `3 × 3` and a dropout rate of `0.25`.
-
 
 ## Explainable AI with Grad-CAM
 
@@ -187,7 +215,6 @@ For each selected test image, the project displays:
 The Grad-CAM analysis also highlights an important limitation of neural networks: the model does not always focus exclusively on clinically relevant lung regions. In some examples, strong activations may appear around the thorax or outside the lung fields.
 
 Therefore, good classification performance does not necessarily imply that the model has learned clinically meaningful features.
-
 
 ## Running the Project
 
@@ -205,7 +232,6 @@ The script will:
 4. Select the best model based on validation loss.
 5. Evaluate the model on the test dataset.
 6. Generate Grad-CAM visualizations.
-
 
 ## Disclaimer
 
